@@ -22,7 +22,7 @@ const routes = [
       { path: 'question', component: Question },
       { path: 'my', component: My }]
   },
-  { path: 'login', component: Login }
+  { path: '/login', component: Login }
 ]
 
 const router = new VueRouter({
