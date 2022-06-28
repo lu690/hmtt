@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="登录" left-arrow>
+    <van-nav-bar title="登录" left-arrow @click-left="$router.back()">
       <van-icon name="cross" slot="left" />
     </van-nav-bar>
 
@@ -18,7 +18,8 @@
           },
         ]"
       >
-        <i class="toutiao toutiao-shouji" slot="left-icon"></i>
+        <!-- <i class="toutiao toutiao-shouji" slot="left-icon"></i> -->
+        <ToutiaoIcon name="shouji" slot="left-icon"></ToutiaoIcon>
       </van-field>
       <van-field
         v-model.trim="code"
@@ -30,7 +31,8 @@
           { pattern: /^\d{6}$/, message: '验证码长度必须是六位' },
         ]"
       >
-        <i class="toutiao toutiao-yanzhengma" slot="left-icon"></i>
+        <!-- <i class="toutiao toutiao-yanzhengma" slot="left-icon"></i> -->
+        <ToutiaoIcon name="yanzhengma" slot="left-icon"></ToutiaoIcon>
         <template #button>
           <van-count-down
             :time="time"
@@ -76,8 +78,9 @@ export default {
         const res = await login(values)
         console.log(res)
         // res.data.data
-        // token有效期2个小时，两种思路，让用户重新登录
+        // token有效期2个小时，两种思路，让用户重新登录 refresh_token
         this.$store.commit('setUser', res.data.data)
+        this.$router.push({ name: 'my' })
       } catch (error) {
         console.log(error)
       }
