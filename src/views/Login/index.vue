@@ -76,11 +76,12 @@ export default {
       // console.log('submit', values)
       try {
         const res = await login(values)
-        console.log(res)
+        console.log('res1', res)
         // res.data.data
         // token有效期2个小时，两种思路，让用户重新登录 refresh_token
         this.$store.commit('setUser', res.data.data)
         this.$router.push({ name: 'my' })
+        // console.log(this.$router)
       } catch (error) {
         console.log(error)
       }

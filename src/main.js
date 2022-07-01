@@ -14,6 +14,12 @@ import '@/styles/index.less'
 
 import ToutiaoIcon from '@/components/ToutiaoIcon.vue'
 
+// 一次性把filters / index.js中所有按需要导出全部导出来，作为obj的属性
+import * as obj from '@/filters'
+Object.keys(obj).forEach(key => {
+  Vue.filter(key, obj[key])
+})
+
 Vue.config.productionTip = false
 Vue.component('ToutiaoIcon', ToutiaoIcon)
 
@@ -23,3 +29,12 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+// 给页面上所有的元素绑定滚动事件
+//  只要谁滚动 就打印出来
+const list = document.querySelectorAll('*')
+list.forEach(item => {
+  item.onscroll = function (e) {
+    console.log(e.target)
+  }
+})
