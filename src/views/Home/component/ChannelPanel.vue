@@ -13,7 +13,7 @@
         >
       </div>
       <van-row type="flex">
-        <van-col span="6" v-for="(item, index) in myChannels" :key="index">
+        <van-col span="6" v-for="(item, index) in channels" :key="index">
           <!-- :style="{ color: active === index ? 'red' : '' }"  利用索引，动态绑定当前频道为红色 -->
           <div
             class="inner"
@@ -51,7 +51,7 @@ const CHANNELS = 'CHANNELS'
 export default {
   name: 'ChannelPanel',
   props: {
-    myChannels: {
+    channels: {
       type: Array,
       required: true
     },
@@ -64,7 +64,7 @@ export default {
     try {
       const res = await getAllArticleList()
       console.log(res)
-      this.recommandPanel = res.data.data.channels.filter(item => this.myChannels.every(item1 => item1.id !== item.id))
+      this.recommandPanel = res.data.data.channels.filter(item => this.channels.every(item1 => item1.id !== item.id))
       console.log(this.recommandPanel)
     } catch (error) {
       console.log(error)
@@ -79,15 +79,15 @@ export default {
   methods: {
     add (id) {
       const index = this.recommandPanel.findIndex(item => item.id === id)
-      this.myChannels.push(this.recommandPanel[index])
+      this.channels.push(this.recommandPanel[index])
       this.recommandPanel.splice(index, 1)
     },
     onclick (index) {
       if (this.isCloseShow) {
         if (index === 0) return // 推荐不能删除，所以要排除掉
         // 删除
-        const obj = this.myChannels[index]
-        this.myChannels.splice(index, 1)
+        const obj = this.channels[index]
+        this.channels.splice(index, 1)
         this.recommandPanel.push(obj)
 
         if (index < this.active) {

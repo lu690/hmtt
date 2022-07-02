@@ -24,7 +24,7 @@ const routes = [
       { path: 'my', component: My, name: 'my' }]
   },
   { path: '/login', component: Login, name: 'login' },
-  { path: 'search', component: Search, name: 'search' }
+  { path: '/search', component: Search, name: 'search' }
 ]
 
 const router = new VueRouter({

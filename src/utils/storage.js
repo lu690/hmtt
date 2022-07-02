@@ -8,7 +8,7 @@ export function getItem (key) {
   try {
     return JSON.parse(res)
   } catch (error) {
-    return error
+    return res
   }
 }
 

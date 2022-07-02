@@ -3,11 +3,11 @@
     <van-nav-bar fixed>
       <!-- <template v-slot:title> -->
       <template #title>
-        <van-button type="info" icon="search">搜索</van-button>
+        <van-button type="info" icon="search" to="/search">搜索</van-button>
       </template>
     </van-nav-bar>
     <van-tabs v-model="active" animated>
-      <van-tab :title="item.name" v-for="item in myChannels" :key="item.id">
+      <van-tab :title="item.name" v-for="item in channels" :key="item.id">
         <ArticleList :id="item.id"></ArticleList>
       </van-tab>
       <template #nav-right>
@@ -29,13 +29,13 @@
     >
       <!-- 父元素接收点击change-active事件，并触发父元素active事件，其实就是子组件的index跟active能够对应上，同时关闭推荐面板 -->
       <ChannelPanel
-        :myChannels="myChannels"
+        :channels="channels"
         :active="active"
         @change-active="
           active = $event;
           isChannelPannelShow = false;
         "
-        @del-active="active = $ev"
+        @del-active="active = $event"
       ></ChannelPanel>
     </van-popup>
   </div>
@@ -55,20 +55,20 @@ export default {
   data () {
     return {
       active: 0,
-      myChannels: [],
+      channels: [],
       isChannelPannelShow: false
     }
   },
   methods: {
     async getMyChannels () {
       const channels = getItem(CHANNELS)
-      if (!(this.$store.state.user && this.$store.state.user.token)) {
+      if (!(this.$store.state.user && this.$store.state.user.token) && channels) {
         this.channels = channels
       } else {
         try {
           const res = await getMyChannels()
           // console.log(res.data.data.channels)
-          this.myChannels = res.data.data.channels
+          this.channels = res.data.data.channels
         } catch (error) {
           console.log(error)
         }
