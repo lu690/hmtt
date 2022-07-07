@@ -9,6 +9,7 @@ const Question = () => import('@/views/Question')
 const My = () => import('@/views/My')
 const Login = () => import('@/views/Login')
 const Search = () => import('@/views/search')
+const Article = () => import('@/views/Article')
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,8 @@ const routes = [
       { path: 'my', component: My, name: 'my' }]
   },
   { path: '/login', component: Login, name: 'login' },
-  { path: '/search', component: Search, name: 'search' }
+  { path: '/search', component: Search, name: 'search' },
+  { path: '/article/:article_id', component: Article, name: 'article', props: true }
 ]
 
 const router = new VueRouter({

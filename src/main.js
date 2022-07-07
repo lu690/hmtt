@@ -14,15 +14,18 @@ import '@/styles/index.less'
 
 import ToutiaoIcon from '@/components/ToutiaoIcon.vue'
 
+import '@/components'
 // 一次性把filters / index.js中所有按需要导出全部导出来，作为obj的属性
 import * as obj from '@/filters'
+import FollowUser from '@/components/FollowUser.vue'
+Vue.component('FollowUser', FollowUser)
+// Vue.component(FollowUser.name, FollowUser)
 Object.keys(obj).forEach(key => {
   Vue.filter(key, obj[key])
 })
 
 Vue.config.productionTip = false
 Vue.component('ToutiaoIcon', ToutiaoIcon)
-
 Vue.use(Vant)
 new Vue({
   router,
